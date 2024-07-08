@@ -10,6 +10,7 @@ This Visual Studio Code extension allows you to right-click on one or multiple f
 - Quick export with default file name and location.
 - Context menu integration for easy access.
 - Shortcut key for quick export.
+- Information message with details of exported files.
 
 ## Usage
 
@@ -18,12 +19,14 @@ This Visual Studio Code extension allows you to right-click on one or multiple f
 1. Right-click on one or multiple files in the explorer.
 2. Select `Export File Contents`.
 3. Choose the destination file and save.
+4. An information message will appear, listing all exported files.
 
 ### Quick Export to FileExport.txt
 
 1. Right-click on one or multiple files in the explorer.
 2. Select `Quick Export to FileExport.txt`.
 3. The contents will be exported to `FileExport.txt` in the same directory as the selected files.
+4. An information message will appear, listing all exported files.
 
 ### Keyboard Shortcut
 

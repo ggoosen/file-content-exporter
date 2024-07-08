@@ -14,7 +14,7 @@
     "commands": [
       {
         "command": "file-content-exporter.exportFiles",
-        "title": "Export File Contents",
+        "title": "Export File(s) Contents",
         "category": "Extension"
       },
       {

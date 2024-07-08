@@ -3,16 +3,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
-    let disposableExportFiles = vscode.commands.registerCommand('file-content-exporter.exportFiles', async (uri: vscode.Uri) => {
-        const selectedFiles = vscode.window.activeTextEditor?.document.uri ? [vscode.window.activeTextEditor.document.uri] : [];
-
-        if (!selectedFiles || selectedFiles.length === 0) {
+    let disposableExportFiles = vscode.commands.registerCommand('file-content-exporter.exportFiles', async (uri: vscode.Uri, selectedUris: vscode.Uri[]) => {
+        if (!selectedUris || selectedUris.length === 0) {
             vscode.window.showErrorMessage('No files selected.');
             return;
         }
 
+        // Concatenate the selected files
         let output = '';
-        for (const fileUri of selectedFiles) {
+        let fileNames = '';
+        for (const fileUri of selectedUris) {
             if (fs.existsSync(fileUri.fsPath)) {
                 const fileStat = fs.statSync(fileUri.fsPath);
                 const relativePath = path.relative(vscode.workspace.rootPath || '', fileUri.fsPath).replace(/\\/g, '/');
@@ -35,12 +35,14 @@ ${fileContent}
 ====================
 
 `;
+                fileNames += `\n${path.basename(fileUri.fsPath)}`;
             } else {
                 output += `File not found: ${fileUri.fsPath}\n`;
+                fileNames += `\n(File not found: ${path.basename(fileUri.fsPath)})`;
             }
         }
 
-        const defaultUri = vscode.Uri.file(path.join(path.dirname(uri.fsPath), 'FileExport.txt'));
+        const defaultUri = vscode.Uri.file(path.join(path.dirname(selectedUris[0].fsPath), 'FileExport.txt'));
 
         const saveUri = await vscode.window.showSaveDialog({
             defaultUri,
@@ -52,22 +54,22 @@ ${fileContent}
 
         if (saveUri) {
             fs.writeFileSync(saveUri.fsPath, output, 'utf8');
-            vscode.window.showInformationMessage(`File information has been saved to ${saveUri.fsPath}`);
+            vscode.window.showInformationMessage(`Files exported to ${saveUri.fsPath}${fileNames}`);
         } else {
             vscode.window.showErrorMessage('Save operation was canceled.');
         }
     });
 
-    let disposableQuickExport = vscode.commands.registerCommand('file-content-exporter.quickExport', async (uri: vscode.Uri) => {
-        const selectedFiles = vscode.window.activeTextEditor?.document.uri ? [vscode.window.activeTextEditor.document.uri] : [];
-
-        if (!selectedFiles || selectedFiles.length === 0) {
+    let disposableQuickExport = vscode.commands.registerCommand('file-content-exporter.quickExport', async (uri: vscode.Uri, selectedUris: vscode.Uri[]) => {
+        if (!selectedUris || selectedUris.length === 0) {
             vscode.window.showErrorMessage('No files selected.');
             return;
         }
 
+        // Concatenate the selected files
         let output = '';
-        for (const fileUri of selectedFiles) {
+        let fileNames = '';
+        for (const fileUri of selectedUris) {
             if (fs.existsSync(fileUri.fsPath)) {
                 const fileStat = fs.statSync(fileUri.fsPath);
                 const relativePath = path.relative(vscode.workspace.rootPath || '', fileUri.fsPath).replace(/\\/g, '/');
@@ -90,14 +92,16 @@ ${fileContent}
 ====================
 
 `;
+                fileNames += `\n${path.basename(fileUri.fsPath)}`;
             } else {
                 output += `File not found: ${fileUri.fsPath}\n`;
+                fileNames += `\n(File not found: ${path.basename(fileUri.fsPath)})`;
             }
         }
 
-        const outputFile = path.join(path.dirname(uri.fsPath), 'FileExport.txt');
+        const outputFile = path.join(path.dirname(selectedUris[0].fsPath), 'FileExport.txt');
         fs.writeFileSync(outputFile, output, 'utf8');
-        vscode.window.showInformationMessage(`File information has been saved to ${outputFile}`);
+        vscode.window.showInformationMessage(`Files exported to ${outputFile}${fileNames}`);
     });
 
     context.subscriptions.push(disposableExportFiles);
