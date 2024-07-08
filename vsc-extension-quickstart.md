@@ -1,48 +1,41 @@
-# Welcome to your VS Code Extension
+# File Content Exporter Extension for Visual Studio Code
 
-## What's in the folder
+Welcome to your new File Content Exporter extension for Visual Studio Code! This guide will help you get started with the development and usage of your extension.
 
-* This folder contains all of the files necessary for your extension.
-* `package.json` - this is the manifest file in which you declare your extension and command.
-  * The sample plugin registers a command and defines its title and command name. With this information VS Code can show the command in the command palette. It doesn’t yet need to load the plugin.
-* `src/extension.ts` - this is the main file where you will provide the implementation of your command.
-  * The file exports one function, `activate`, which is called the very first time your extension is activated (in this case by executing the command). Inside the `activate` function we call `registerCommand`.
-  * We pass the function containing the implementation of the command as the second parameter to `registerCommand`.
+## What's in the Folder
 
-## Setup
+* `package.json` - Contains the essential information about your extension, such as its name, version, and description. It also includes scripts to build, run, and package your extension.
+* `src/extension.ts` - The source code of your extension. This is where you implement the functionality of your commands.
+* `README.md` - This file contains a description of your extension's features and usage instructions.
+* `CHANGELOG.md` - This file contains a history of your extension's updates and changes.
 
-* install the recommended extensions (amodio.tsl-problem-matcher, ms-vscode.extension-test-runner, and dbaeumer.vscode-eslint)
+## Running Your Extension
 
+To run your extension:
 
-## Get up and running straight away
+1. Press `F5` to open a new VS Code window with your extension loaded.
+2. You can now test your extension by right-clicking on files in the explorer and using the commands provided by your extension.
 
-* Press `F5` to open a new window with your extension loaded.
-* Run your command from the command palette by pressing (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and typing `Hello World`.
-* Set breakpoints in your code inside `src/extension.ts` to debug your extension.
-* Find output from your extension in the debug console.
+## Structure of the Extension
 
-## Make changes
+### `package.json`
 
-* You can relaunch the extension from the debug toolbar after changing code in `src/extension.ts`.
-* You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with your extension to load your changes.
+The `package.json` file contains metadata about your extension, such as:
 
+- `name`, `displayName`, `description`, `version`
+- `activationEvents`: Specifies when your extension should be activated.
+- `contributes`: Defines the commands and keybindings provided by your extension.
 
-## Explore the API
+### `src/extension.ts`
 
-* You can open the full set of our API when you open the file `node_modules/@types/vscode/index.d.ts`.
+This is the main file where you implement the functionality of your extension. Key points include:
 
-## Run tests
+- Registering commands with `vscode.commands.registerCommand`.
+- Handling the logic for concatenating file contents and exporting them.
 
-* Install the [Extension Test Runner](https://marketplace.visualstudio.com/items?itemName=ms-vscode.extension-test-runner)
-* Run the "watch" task via the **Tasks: Run Task** command. Make sure this is running, or tests might not be discovered.
-* Open the Testing view from the activity bar and click the Run Test" button, or use the hotkey `Ctrl/Cmd + ; A`
-* See the output of the test result in the Test Results view.
-* Make changes to `src/test/extension.test.ts` or create new test files inside the `test` folder.
-  * The provided test runner will only consider files matching the name pattern `**.test.ts`.
-  * You can create folders inside the `test` folder to structure your tests any way you want.
+Example of registering a command:
 
-## Go further
-
-* Reduce the extension size and improve the startup time by [bundling your extension](https://code.visualstudio.com/api/working-with-extensions/bundling-extension).
-* [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VS Code extension marketplace.
-* Automate builds by setting up [Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration).
+```typescript
+let disposable = vscode.commands.registerCommand('file-content-exporter.exportFiles', async (uri: vscode.Uri, selectedUris: vscode.Uri[]) => {
+    // Your implementation here
+});

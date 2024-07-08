@@ -36,11 +36,38 @@ This Visual Studio Code extension allows you to right-click on one or multiple f
 
 To install this extension, follow these steps:
 
-1. Download the latest `.vsix` package from the [releases page](https://github.com/your-repo/file-content-exporter/releases).
+1. Download the latest `.vsix` package from the [releases page](https://github.com/ggoosen/file-content-exporter/releases).
 2. Open Visual Studio Code.
 3. Go to the Extensions view by clicking the Extensions icon in the Activity Bar on the side of the window or by pressing `Ctrl+Shift+X`.
 4. Click on the three-dot menu at the top right of the Extensions view and select `Install from VSIX...`.
 5. Navigate to the downloaded `.vsix` file and select it.
+
+## Packaging
+
+To package the extension for distribution, follow these steps:
+
+1. Ensure all changes are committed and pushed to your repository.
+2. Run the following command to package your extension:
+    ```bash
+    vsce package
+    ```
+3. This will generate a `.vsix` file that you can distribute or publish.
+
+## Publishing
+
+To publish your extension to the Visual Studio Code Marketplace:
+
+1. Create a publisher account on the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/vscode).
+2. Run the following command to login with `vsce`:
+    ```bash
+    vsce login <publisher name>
+    ```
+3. Publish your extension:
+    ```bash
+    vsce publish
+    ```
+
+For detailed instructions, refer to the [Visual Studio Code documentation](https://code.visualstudio.com/api/working-with-extensions/publishing-extension).
 
 ## Development
 
@@ -51,13 +78,6 @@ To contribute to this extension or make modifications, follow these steps:
 3. Run `npm install` to install the dependencies.
 4. Run `npm run compile` to build the extension.
 5. Press `F5` to open a new VS Code window with the extension loaded.
-
-## Packaging
-
-To package the extension for distribution, follow these steps:
-
-1. Ensure all changes are committed and pushed to the repository.
-2. Run `vsce package` to create the `.vsix` file.
 
 ## Contributing
 

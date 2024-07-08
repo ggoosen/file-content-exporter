@@ -27,7 +27,7 @@
       },
       {
         "command": "file-content-exporter.quickExport",
-        "title": "Quick Export to FileExport.txt",
+        "title": "Quick Export File(s) to FileExport.txt",
         "category": "Extension"
       }
     ],
