@@ -61,7 +61,7 @@ To package the extension for distribution, follow these steps:
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request on the [GitHub repository](https://github.com/your-repo/file-content-exporter).
+Contributions are welcome! Please open an issue or submit a pull request on the [GitHub repository](https://github.com/ggoosen/file-content-exporter).
 
 ## License
 

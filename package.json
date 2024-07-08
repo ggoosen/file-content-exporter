@@ -9,12 +9,20 @@
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ggoosen/file-content-exporter"
+  },
+  "activationEvents": [
+    "onCommand:file-content-exporter.exportFiles",
+    "onCommand:file-content-exporter.quickExport"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "file-content-exporter.exportFiles",
-        "title": "Export File(s) Contents",
+        "title": "Export File Contents",
         "category": "Extension"
       },
       {
@@ -27,11 +35,11 @@
       "explorer/context": [
         {
           "command": "file-content-exporter.exportFiles",
-          "group": "fileexporter@100"
+          "group": "fileexporter@1"
         },
         {
           "command": "file-content-exporter.quickExport",
-          "group": "fileexporter@101"
+          "group": "fileexporter@2"
         }
       ]
     },
